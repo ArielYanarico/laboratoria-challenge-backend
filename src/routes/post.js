@@ -1,54 +1,46 @@
 import { Router } from 'express';
- 
+
 const router = Router();
 
-router.get('/', (req, res) => {
-  return res.send(req.context.models.posts);
-});
- 
-router.get('/:postId', (req, res) => {
-  return res.send(req.context.models.posts[req.params.postId]);
+router.get('/', async (req, res) => {
+  const posts = await req.context.models.Post.find();
+  return res.send(posts);
 });
 
-router.post('/', (req, res) => {
-  const id = uuidv4();
-  const post = {
-    id,
-    text: req.body.text,
-    userId: req.context.me.id,
-  };
- 
-  req.context.models.posts[id] = post;
- 
+router.get('/:postId', async (req, res) => {
+  const post = await req.context.models.Post.findById(
+    req.params.postId,
+  );
   return res.send(post);
 });
 
-router.put('/:postId', (req, res) => {
-  const id = uuidv4();
-  const {
-    [req.params.postId]: post,
-    ...otherPosts
-  } = req.context.models.posts;
+router.post('/', async (req, res) => {
+  const post = await req.context.models.Post.create(req.body);
 
-  post = {
-    id,
-    text: req.body.text,
-    userId: req.context.me.id,
-  };
- 
-  req.context.models.posts = [post, ...otherPosts];
- 
   return res.send(post);
 });
 
-router.delete('/:postId', (req, res) => {
-  const {
-    [req.params.postId]: post,
-    ...otherPosts
-  } = req.context.models.posts;
- 
-  req.context.models.posts = otherPosts;
- 
+router.put('/:postId', async (req, res) => {
+  const post = await req.context.models.Post.findById(
+    req.params.postId,
+  );
+
+  if (post) {
+    await post.put({ text: req.body.text, });
+  }
+
+  return res.send(post);
+});
+
+router.delete('/:postId', async (req, res) => {
+  const post = await req.context.models.Post.findById(
+    req.params.postId,
+  );
+
+  if (post) {
+    await post.remove();
+  }
+
   return res.send(post);
 });
 

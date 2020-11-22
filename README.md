@@ -12,6 +12,7 @@ We should set upp the enviroment variables before start.
 
 PORT=3000
 SECRET=secret
+DATABASE_URL=mongodb://localhost:27017/databaseName
 
 Then we could run.
 
