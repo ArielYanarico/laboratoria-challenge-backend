@@ -1,0 +1,20 @@
+{
+  "name": "laboratoria-challenge-backend",
+  "version": "1.0.0",
+  "description": "Laboratoria code challenge backend",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.7",
+    "@babel/node": "^7.12.6",
+    "@babel/preset-env": "^7.12.7",
+    "nodemon": "^2.0.6"
+  },
+  "scripts": {
+    "start": "nodemon --exec babel-node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ariel Yanarico",
+  "license": "GNU"
+}
