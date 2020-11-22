@@ -1,7 +1,7 @@
 {
   "name": "laboratoria-challenge-backend",
   "version": "1.0.0",
-  "description": "Laboratoria code challenge backend",
+  "description": "Laboratoria code challenge backend (Reactibook)",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
