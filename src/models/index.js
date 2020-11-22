@@ -1,28 +1,14 @@
-let users = {
-  1: {
-    id: '1',
-    username: 'Horacio Perez',
-  },
-  2: {
-    id: '2',
-    username: 'Gustabo Garcia',
-  },
+import mongoose from 'mongoose';
+ 
+import User from './user';
+import Post from './post';
+ 
+const connectDb = () => {
+  return mongoose.connect(process.env.DATABASE_URL);
 };
  
-let posts = {
-  1: {
-    id: '1',
-    text: 'Hello',
-    userId: '1',
-  },
-  2: {
-    id: '2',
-    text: 'Howdy',
-    userId: '2',
-  },
-};
+const models = { User, Post };
  
-export default {
-  users,
-  posts,
-};
+export { connectDb };
+ 
+export default models;
