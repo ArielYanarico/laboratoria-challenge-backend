@@ -21,12 +21,15 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:postId', async (req, res) => {
-  const post = await req.context.models.Post.findById(
+  let post = await req.context.models.Post.findById(
     req.params.postId,
   );
 
   if (post) {
-    await post.put({ text: req.body.text, });
+    await post.updateOne({ text: req.body.text, });
+    post = await req.context.models.Post.findById(
+      req.params.postId,
+    );
   }
 
   return res.send(post);
