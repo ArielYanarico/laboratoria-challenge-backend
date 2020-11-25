@@ -7,9 +7,17 @@ router.get('/', async (req, res) => {
   return res.send(posts);
 });
 
-router.get('/:postId', async (req, res) => {
-  const post = await req.context.models.Post.findById(
-    req.params.postId,
+router.get('/:userId', async (req, res) => {
+
+  const user = await req.context.models.User.findById(
+    req.params.userId,
+  );
+
+
+  console.log(user)
+
+  const post = await req.context.models.Post.find(
+    { $or: [ {"isPublic": true}, {"user": { $in: [ user._id, ...user.friends ] } } ] },
   );
   return res.send(post);
 });
