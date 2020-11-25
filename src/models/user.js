@@ -7,6 +7,9 @@ const userSchema = new mongoose.Schema(
       unique: true,
       required: true,
     },
+    friends: {
+      type: Array,
+    },
   },
   { timestamps: true },
 );
